@@ -4,30 +4,41 @@
     "slug": "appCar",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/icon.png",
+    "icon": "./assets/preview.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/splash.png",
+      "image": "./assets/preview.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#8CBCB9"
     },
     "updates": {
-      "fallbackToCacheTimeout": 0
+      "fallbackToCacheTimeout": 0,
+      "url": "https://u.expo.dev/a6bb9198-b284-4a21-a465-eb4e5b9c9f34"
     },
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.omar1054.appCar"
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF"
-      }
+        "foregroundImage": "./assets/preview.png",
+        "backgroundColor": "#8CBCB9"
+      },
+      "package": "com.omar1054.appCar"
     },
     "web": {
-      "favicon": "./assets/favicon.png"
+      "favicon": "./assets/preview.png"
+    },
+    "extra": {
+      "eas": {
+        "projectId": "a6bb9198-b284-4a21-a465-eb4e5b9c9f34"
+      }
+    },
+    "runtimeVersion": {
+      "policy": "sdkVersion"
     }
   }
 }
