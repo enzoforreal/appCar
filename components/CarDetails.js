@@ -8,10 +8,10 @@ import {storage} from "./Firebase"
 import {collection, doc, getDoc, getDocs, onSnapshot, query, setDoc} from "firebase/firestore";
 import { db } from './Firebase';
 import { Feather, Ionicons, Entypo, MaterialCommunityIcons, FontAwesome } from '@expo/vector-icons';
-import { CartProvider, useCart } from "react-use-cart";
+import firebase from "./Firebase"
 import { auth } from './Firebase';
 import uuid from 'react-native-uuid';
-import AsyncStorage from '@react-native-async-storage/async-storage';
+
 
 
 
@@ -25,7 +25,7 @@ const CarDetails = ({route, navigation}) => {
 
     }, []);
 
-    const { addItem } = useCart();
+    
     const user = auth.currentUser;
 
     const [carImage, setCarImage] = useState("")
@@ -172,9 +172,20 @@ const CarDetails = ({route, navigation}) => {
 
                           const creat2 = async () => {
 
-                            await setDoc(doc(db, "Bookings", `${uuid.v4()}` + "#" + `${user.uid}`), {
+                            await setDoc(doc(db, "Bookings", `${user.uid}`, "CarBookings", `${uuid.v4()}`), {
                               bookingCarImage: item.carImage,
+                              bookingCarPrice: item.price,
+                              bookingCarModel: item.model,
+                              bookingCarYear: item.year,
+                              bookingCarEngine: item.engine,
+                              bookingCarSpeed: item.speed,
+                              bookingCarRenterName: item.fullname,
+                              bookingCarRenterPhone: item.phone,
+                              bookingCarLocation: item.location,
                               bookingUserId: user.uid,
+                              bookingCarId: item.id,
+                              bookingCarDescription: item.description,
+                              bookingCreatedAt: firebase.firestore.FieldValue.serverTimestamp(),
                             }).then(() => {
                              
                               console.log("Document successfully written!");
@@ -185,7 +196,7 @@ const CarDetails = ({route, navigation}) => {
                             
                           };
                           creat2();
-                          navigate.navigate("Bookings", {itemId2: item.carImage});
+                          navigate.navigate("Profile", {itemId2: item.carImage});
                           setCarImage(item.carImage);
                           setUserId(user.uid);
                           

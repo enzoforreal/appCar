@@ -13,7 +13,7 @@ import {collection, getDoc, getDocs, onSnapshot, query} from "firebase/firestore
 import { db } from './Firebase';
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/firestore';
-import MapView from "react-native-maps";
+
 
 
 

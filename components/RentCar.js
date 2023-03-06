@@ -1,4 +1,4 @@
-import { View, Text, Image, Button, ActivityIndicator, TouchableOpacity, SafeAreaView, TextInput } from 'react-native'
+import { View, Text, Image, Button, ActivityIndicator, TouchableOpacity, SafeAreaView, TextInput, ScrollView } from 'react-native'
 import React, { useEffect, useLayoutEffect, useState} from 'react'
 import { useNavigation } from '@react-navigation/native'
 import * as ImagePicker from 'expo-image-picker';
@@ -131,6 +131,7 @@ const RentCar = () => {
         )
     }
 
+    
     const create = async () => {
       await setDoc(doc(db, "Car-Details", `${uuid.v4()}` + "#" + `${user.uid}` ), {
           fullname: fullname,
@@ -143,7 +144,10 @@ const RentCar = () => {
           speed: speed,
           engine: engine,
           carImage: downloadURL,
+          location: location,
           userId: user.uid,
+          createdAt: firebase.firestore.FieldValue.serverTimestamp(),
+          id: `${uuid.v4()}` + "#" + `${user.uid}`
       }).then(() => {
           console.log("Document successfully written!");
           navigate.navigate("Profile");
@@ -161,7 +165,8 @@ const RentCar = () => {
           <Animatable.View 
           animation={"pulse"}
           easing={'ease-in-out'}
-          className="">
+   
+   className="">
               <Ionicons name="ios-arrow-back" size={32} color="black" />
           
           </Animatable.View>
@@ -177,30 +182,33 @@ const RentCar = () => {
                  </View> 
             
         </View>
-        <View className="p-4 mt-5">
-            <TextInput label="name" placeholder="Full name" value={fullname} onChangeText={(e) => setFullname(e)}   className="bg-\transparent flex-auto mr-3 underline-offset-1 border-b-2 border-[#D4DCF8]" />
-        </View>
-        <View className="p-4 mt-5">
-            <TextInput label="name" placeholder="Email" value={email} autoCapitalize='none' keyboardType="email-address" onChangeText={(e) => setEmail(e)} className="bg-\transparent flex-auto mr-3 underline-offset-1 border-b-2 border-[#D4DCF8]" />
-        </View>
-        <View className="p-4 mt-5">
-            <TextInput label="name" placeholder="Phone number" value={phone} keyboardType="phone-pad" onChangeText={(e) => setPhone(e)} className="bg-\transparent flex-auto mr-3 underline-offset-1 border-b-2 border-[#D4DCF8]" />
-        </View>
-        <View className="p-4 mt-5 flex-row">
-            <TextInput label="name" placeholder="Model" value={model} onChangeText={(e) => setModel(e)} className="bg-\transparent flex-auto mr-3 w-1/2 underline-offset-1 border-b-2 border-[#D4DCF8]" />
-            <TextInput label="name" placeholder="Year" value={year} keyboardType="number-pad" onChangeText={(e) => setYear(e)}  className="bg-\transparent flex-auto mr-3 w-1/2 underline-offset-1 border-b-2 border-[#D4DCF8]" />
-            <TextInput label="name" placeholder="Speed" value={speed} keyboardType="number-pad" onChangeText={(e) => setSpeed(e)}  className="bg-\transparent flex-auto mr-3 w-1/2 underline-offset-1 border-b-2 border-[#D4DCF8]" />
-            <TextInput label="name" placeholder="Engine" value={engine} keyboardType="number-pad" onChangeText={(e) => setEngine(e)}  className="bg-\transparent flex-auto mr-3 w-1/2 underline-offset-1 border-b-2 border-[#D4DCF8]" />
-        </View>
-        <View className="p-4 mt-5">
-            <TextInput label="name" placeholder="Price per day" value={price} keyboardType="number-pad" onChangeText={(e) => setPrice(e)}   className="bg-\transparent flex-auto mr-3 underline-offset-1 border-b-2 border-[#D4DCF8]" />
-        </View>
-        <View className="p-4 mt-5">
-            <TextInput label="name" placeholder="Car Description" value={description} maxLength={70} onChangeText={(e) => setDescription(e)}   className="bg-\transparent flex-auto mr-3 underline-offset-1 border-b-2 border-[#D4DCF8]" />
-        </View>
-        <View className="mt-5 w-full items-center justify-center">
-            <Button title="Rent" onPress={create} color="#6A8D92"/>
-        </View>
+        <ScrollView className="space-y-5 ">
+          <View className="p-4 mt-5">
+              <TextInput label="name" placeholder="Full name" value={fullname} onChangeText={(e) => setFullname(e)}   className="bg-\transparent flex-auto mr-3 underline-offset-1 border-b-2 border-[#D4DCF8]" />
+          </View>
+          <View className="p-4 mt-5">
+              <TextInput label="name" placeholder="Email" value={email} autoCapitalize='none' keyboardType="email-address" onChangeText={(e) => setEmail(e)} className="bg-\transparent flex-auto mr-3 underline-offset-1 border-b-2 border-[#D4DCF8]" />
+          </View>
+          <View className="p-4 mt-5">
+              <TextInput label="name" placeholder="Phone number" value={phone} keyboardType="phone-pad" onChangeText={(e) => setPhone(e)} className="bg-\transparent flex-auto mr-3 underline-offset-1 border-b-2 border-[#D4DCF8]" />
+          </View>
+          <View className="p-4 mt-5 flex-row">
+              <TextInput label="name" placeholder="Model" value={model} onChangeText={(e) => setModel(e)} className="bg-\transparent flex-auto mr-3 w-1/2 underline-offset-1 border-b-2 border-[#D4DCF8]" />
+              <TextInput label="name" placeholder="Year" value={year} keyboardType="number-pad" onChangeText={(e) => setYear(e)}  className="bg-\transparent flex-auto mr-3 w-1/2 underline-offset-1 border-b-2 border-[#D4DCF8]" />
+              <TextInput label="name" placeholder="Speed" value={speed} keyboardType="number-pad" onChangeText={(e) => setSpeed(e)}  className="bg-\transparent flex-auto mr-3 w-1/2 underline-offset-1 border-b-2 border-[#D4DCF8]" />
+              <TextInput label="name" placeholder="Engine" value={engine} keyboardType="number-pad" onChangeText={(e) => setEngine(e)}  className="bg-\transparent flex-auto mr-3 w-1/2 underline-offset-1 border-b-2 border-[#D4DCF8]" />
+              <TextInput label="name" placeholder="Location" value={location} onChangeText={(e) => setLocation(e)}  className="bg-\transparent flex-auto mr-3 w-1/2 underline-offset-1 border-b-2 border-[#D4DCF8]" />
+          </View>
+          <View className="p-4 mt-5">
+              <TextInput label="name" placeholder="Price per day" value={price} keyboardType="number-pad" onChangeText={(e) => setPrice(e)}   className="bg-\transparent flex-auto mr-3 underline-offset-1 border-b-2 border-[#D4DCF8]" />
+          </View>
+          <View className="p-4 mt-5">
+              <TextInput label="name" placeholder="Car Description" value={description} maxLength={70} onChangeText={(e) => setDescription(e)}   className="bg-\transparent flex-auto mr-3 underline-offset-1 border-b-2 border-[#D4DCF8]" />
+          </View>
+          <View className="mt-5 w-full items-center justify-center">
+              <Button title="Rent" onPress={create} color="#6A8D92"/>
+          </View>
+        </ScrollView>
     </SafeAreaView>
   )
 }

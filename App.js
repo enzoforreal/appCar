@@ -15,7 +15,7 @@ import CarDetails from './components/CarDetails';
 import { auth } from './components/Firebase';
 import React, { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
-import { CartProvider, useCart } from "react-use-cart";
+
 
 
 const Stack = createNativeStackNavigator();
