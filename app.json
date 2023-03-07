@@ -4,12 +4,13 @@
     "slug": "appCar",
     "version": "1.0.0",
     "orientation": "portrait",
-    "icon": "./assets/preview.png",
+    "icon": "./assets/splashLogo.png",
     "userInterfaceStyle": "light",
     "splash": {
-      "image": "./assets/preview.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#8CBCB9"
+      "image": "./assets/splashLogo.png",
+      "width": 350,
+      "height": 334,
+      "backgroundColor": "#FA8029"
     },
     "updates": {
       "fallbackToCacheTimeout": 0,
@@ -24,13 +25,13 @@
     },
     "android": {
       "adaptiveIcon": {
-        "foregroundImage": "./assets/preview.png",
+        "foregroundImage": "./assets/splashLogo.png",
         "backgroundColor": "#8CBCB9"
       },
       "package": "com.omar1054.appCar"
     },
     "web": {
-      "favicon": "./assets/preview.png"
+      "favicon": "./assets/splashLogo.png"
     },
     "extra": {
       "eas": {
