@@ -5,6 +5,7 @@ import { signOut } from "firebase/auth";
 import { auth } from './Firebase';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { Feather } from '@expo/vector-icons';
+import { FontAwesome } from '@expo/vector-icons';
 import * as Animatable from 'react-native-animatable';
 import { avatar } from '../assets/index';
 import { getStorage, ref, getDownloadURL, listAll } from "firebase/storage";
@@ -22,7 +23,7 @@ import 'firebase/compat/firestore';
 
 
 
-const Profile = () => {
+const Motorcycle = () => {
   const user = auth.currentUser;
   const navigate = useNavigation();
     useLayoutEffect(() => {
@@ -73,7 +74,7 @@ const [Posts, setPosts] = useState([]);
 
   const fetchImages =  () => {
     let unsubscribe = false
-    getDocs(collection(db, "Car-Details")).then((querySnapshot) => {
+    getDocs(collection(db, "Motorcycle-Details")).then((querySnapshot) => {
       if (unsubscribe) return
       const newUserDataArray = querySnapshot.docs
       .map((doc) => (doc.data()))
@@ -133,7 +134,7 @@ const [Posts, setPosts] = useState([]);
             </Animatable.View>
           </TouchableOpacity>
           
-          <TouchableOpacity onPress={() => navigate.navigate('Settings', {name: 'Settings'})}>
+          <TouchableOpacity onPress={() => navigate.navigate('MotorcycleSettings', {name: 'MotorcycleSettings'})}>
             <Animatable.View 
               animation={"pulse"}
               easing={'ease-in-out'}
@@ -147,8 +148,8 @@ const [Posts, setPosts] = useState([]);
       </View>
 
       <View className="pl-4 mt-4">
-        <TouchableOpacity onPress={() => navigate.navigate("Motorcycle", {name: "Motorcycle"})}>
-          <Text className="text-base">Do you want to see motocycles?</Text>
+        <TouchableOpacity onPress={() => navigate.navigate("Profile", {name: "Profile"})}>
+          <Text className="text-base">Do you want to see cars?</Text>
         </TouchableOpacity>
       </View>
 
@@ -163,7 +164,7 @@ const [Posts, setPosts] = useState([]);
             
         >
             {Posts.map((item, index) => (
-              <TouchableOpacity onPress={() => navigate.navigate("CarDetails", {name: "CarDetails", itemId: item.carImage})}>
+              <TouchableOpacity onPress={() => navigate.navigate("MotorcycleDetails", {name: "MotorcycleDetails", itemId: item.carImage})}>
                 <View className="space-y-5 bg-[#e7e7e7] justify-between flex-row h-52 items-center  rounded-xl">
                   <Image source={{uri: item.carImage}} style={{overflow: 'hidden'}} className="w-2/5 h-52 rounded-lg "/>
                   <View className="flex  space-y-10  items-end justify-between   ">
@@ -199,4 +200,4 @@ const [Posts, setPosts] = useState([]);
   )
 }
 
-export default Profile
+export default Motorcycle

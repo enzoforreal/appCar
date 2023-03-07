@@ -18,7 +18,7 @@ import MapViewDirections from 'react-native-maps-directions';
 
 
 
-const Bookings = ({route}) => {
+const MotorcycleBookings = ({route}) => {
     const navigate = useNavigation();
     useLayoutEffect(() => {
         navigate.setOptions({
@@ -50,7 +50,7 @@ const Bookings = ({route}) => {
 
     const fetchImages =  () => {
         let unsubscribe = false
-        getDocs(collection(db, "Car-Details")).then((querySnapshot) => {
+        getDocs(collection(db, "Motorcycle-Details")).then((querySnapshot) => {
           if (unsubscribe) return
           const newUserDataArray = querySnapshot.docs
           .map((doc) => (doc.data()))
@@ -76,7 +76,7 @@ const Bookings = ({route}) => {
 
         const fetchBookings =  () => {
         let unsubscribe = false
-        getDocs(collection(db, "Bookings", `${user.uid}`, "CarBookings")).then((querySnapshot) => {
+        getDocs(collection(db, "Motorcycle-Bookings", `${user.uid}`, "MotorcycleBookings")).then((querySnapshot) => {
           if (unsubscribe) return
           const newUserDataArray = querySnapshot.docs
           .map((doc) => ({id: doc.id, ...doc.data()}))
@@ -117,9 +117,6 @@ const Bookings = ({route}) => {
     }
 
 
-    const origin = {latitude: 37.3318456, longitude: -122.0296002};
-    const destination = {latitude: 37.771707, longitude: -122.4053769};
-    const GOOGLE_MAPS_APIKEY = 'AIzaSyAGL2KalRkDXHq7bcQDjkWzhbOBpLB488I';
 
     
 
@@ -140,7 +137,7 @@ const Bookings = ({route}) => {
   return (
     <SafeAreaView className="">
         <View className="flex-row mt-10 space-x-12">
-          <TouchableOpacity onPress={() => navigate.navigate('Profile', {name: 'Profile'})}>
+          <TouchableOpacity onPress={() => navigate.navigate('Motorcycle', {name: 'Motorcycle'})}>
             <Animatable.View 
             animation={"pulse"}
             easing={'ease-in-out'}
@@ -149,7 +146,7 @@ const Bookings = ({route}) => {
             
             </Animatable.View>
           </TouchableOpacity>
-          <Text className="text-xl font-bold">Car Details</Text>
+          <Text className="text-xl font-bold">Motorcycle Details</Text>
         </View>
 
         <View className="mt-10 p-2 pb-24 " style={{height: height, flex: 0}}>
@@ -165,7 +162,7 @@ const Bookings = ({route}) => {
                             <View className="mt-4 p-4 space-y-2">
                                 <View className="flex-row justify-between">
                                   <Text className="text-2xl font-bold mt-6">{item.bookingCarModel}</Text>
-                                 <TouchableOpacity onPress={() => deleteDoc(doc(db, "Bookings", `${user.uid}`, "CarBookings", `${item.id}`))}>
+                                 <TouchableOpacity onPress={() => deleteDoc(doc(db, "Motorcycle-Bookings", `${user.uid}`, "MotorcycleBookings", `${item.id}`))}>
                                     <EvilIcons name="trash" size={32} color="red" />
                                   
                                  </TouchableOpacity>
@@ -220,4 +217,4 @@ const Bookings = ({route}) => {
   )
 }
 
-export default Bookings
+export default MotorcycleBookings

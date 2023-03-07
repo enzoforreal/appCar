@@ -15,7 +15,7 @@ import * as Animatable from 'react-native-animatable';
 
 
 
-const RentCar = () => {
+const RentMotorcycle = () => {
     const navigate = useNavigation();
     const user = auth.currentUser;
     useLayoutEffect(() => {
@@ -37,7 +37,7 @@ const RentCar = () => {
     const [engine, setEngine] = useState('')
 
     const storage = getStorage();
-    const starsRef = ref(storage, (`Car-Pictures/${user.uid}`));
+    const starsRef = ref(storage, (`Motorcycle-Pictures/${user.uid}`));
     const[downloadURL, setDownloadURL] = useState()
     useEffect(() => {
       getDownloadURL(starsRef)
@@ -106,7 +106,7 @@ const RentCar = () => {
 
       }
 
-      const ref = firebase.storage().ref().child(`Car-Pictures/${uuid.v4()}` + "#" + `${user.uid}`)
+      const ref = firebase.storage().ref().child(`Motorcycle-Pictures/${uuid.v4()}` + "#" + `${user.uid}`)
       const snapshot = ref.put(blob)
       snapshot.on(firebase.storage.TaskEvent.STATE_CHANGED,
         ()=>{
@@ -133,7 +133,7 @@ const RentCar = () => {
 
     
     const create = async () => {
-      await setDoc(doc(db, "Car-Details", `${uuid.v4()}` + "#" + `${user.uid}` ), {
+      await setDoc(doc(db, "Motorcycle-Details", `${uuid.v4()}` + "#" + `${user.uid}` ), {
           fullname: fullname,
           email: email,
           model: model,
@@ -150,7 +150,7 @@ const RentCar = () => {
           id: `${uuid.v4()}` + "#" + `${user.uid}`
       }).then(() => {
           console.log("Document successfully written!");
-          navigate.navigate("Profile");
+          navigate.navigate("Motorcycle");
       }).catch((error) => {
           console.error("Error writing document: ", error);
       });
@@ -161,7 +161,7 @@ const RentCar = () => {
   return (
     <SafeAreaView>
       <View className="flex-row mt-12 space-x-4">
-        <TouchableOpacity onPress={() => navigate.navigate('Settings', {name: 'Settings'})}>
+        <TouchableOpacity onPress={() => navigate.navigate('MotorcycleSettings', {name: 'MotorcycleSettings'})}>
           <Animatable.View 
           animation={"pulse"}
           easing={'ease-in-out'}
@@ -171,7 +171,7 @@ const RentCar = () => {
           
           </Animatable.View>
         </TouchableOpacity>
-        <Text className="text-xl font-bold">Rent you car</Text>
+        <Text className="text-xl font-bold">Rent you motorcycle</Text>
       </View>
         <View className="mt-16 items-center justify-center border-4 border-[#80B192] rounded-full  ">
                 <TouchableOpacity onPress={pickImage} className="w-20 h-20 items-center justify-center  rounded-full">
@@ -213,4 +213,4 @@ const RentCar = () => {
   )
 }
 
-export default RentCar
+export default RentMotorcycle

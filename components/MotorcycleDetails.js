@@ -16,7 +16,7 @@ import uuid from 'react-native-uuid';
 
 
 
-const CarDetails = ({route, navigation}) => {
+const MotorcycleDetails = ({route, navigation}) => {
   const navigate = useNavigation();
     useLayoutEffect(() => {
         navigate.setOptions({
@@ -39,10 +39,7 @@ const CarDetails = ({route, navigation}) => {
     const [Posts, setPosts] = useState([]);
     const width = Dimensions.get('window').width;
 
-    const showToast = () => {
-      ToastAndroid.show("You have successfully booked this car", ToastAndroid.SHORT);
-      navigate.navigate("Profile" , {name: 'Profile'})
-    }
+
 
     
 
@@ -51,7 +48,7 @@ const CarDetails = ({route, navigation}) => {
 
   const fetchImages =  () => {
     let unsubscribe = false
-    getDocs(collection(db, "Car-Details")).then((querySnapshot) => {
+    getDocs(collection(db, "Motorcycle-Details")).then((querySnapshot) => {
       if (unsubscribe) return
       const newUserDataArray = querySnapshot.docs
       .map((doc) => (doc.data()))
@@ -78,7 +75,7 @@ const CarDetails = ({route, navigation}) => {
   const check = Posts.filter((item) => item.carImage === itemId)
 
   const create = async () => {
-    await setDoc(doc(db, "Bookings", `${uuid.v4()}` + "#" + `${user.uid}`), {
+    await setDoc(doc(db, "Motorcycle-Bookings", `${uuid.v4()}` + "#" + `${user.uid}`), {
       carImage: carImage,
       userId: user.uid,
     }).then(() => {
@@ -103,7 +100,7 @@ const CarDetails = ({route, navigation}) => {
     <SafeAreaView>
       <View className="">
       <View className="flex-row mt-6 space-x-12">
-        <TouchableOpacity onPress={() => navigate.navigate('Profile', {name: 'Profile'})}>
+        <TouchableOpacity onPress={() => navigate.navigate('Motorcycle', {name: 'Motorcycle'})}>
           <Animatable.View 
           animation={"pulse"}
           easing={'ease-in-out'}
@@ -112,7 +109,7 @@ const CarDetails = ({route, navigation}) => {
           
           </Animatable.View>
         </TouchableOpacity>
-        <Text className="text-xl font-bold">Car Details</Text>
+        <Text className="text-xl font-bold">Motorcycle Details</Text>
       </View>
         {check.map((item, index) => (
           <SafeAreaView className="">
@@ -124,7 +121,7 @@ const CarDetails = ({route, navigation}) => {
               <Text className="text-sm text-[#757e89]  mt-2 w-3/4" >{item.description}</Text>  
             </View>
             <View className="bg-[#e7e7db] shadow-2xl space-y-4  h-full p-4  rounded-t-3xl" >
-              <Text>Renter</Text>
+              <Text className="text-gray-500">Renter</Text>
               <View className="flex-row justify-between">
                 <View className="flex-row space-x-2">
                     <Ionicons name="person-outline" size={20} color="black" />
@@ -169,13 +166,13 @@ const CarDetails = ({route, navigation}) => {
                   <Text className="text-center  font-Poppins mt-6">/day</Text>
                 </View>
                 <View className="p-2" >
-
-                      <View className="w-28 h-12 rounded-3xl mt-2 ml-4">
-                        <Button title="Book a car" color="#a5d3de" onPress={() => {
+ 
+                      <View className="w-36 h-12 bg-[#a5d3de] rounded-3xl ">
+                        <TouchableOpacity title="Book a motorcycle"  color="#a5d3de" onPress={() => {
 
                           const creat2 = async () => {
 
-                            await setDoc(doc(db, "Bookings", `${user.uid}`, "CarBookings", `${uuid.v4()}`), {
+                            await setDoc(doc(db, "Motorcycle-Bookings", `${user.uid}`, "MotorcycleBookings", `${uuid.v4()}`), {
                               bookingCarImage: item.carImage,
                               bookingCarPrice: item.price,
                               bookingCarModel: item.model,
@@ -199,14 +196,18 @@ const CarDetails = ({route, navigation}) => {
                             
                           };
                           creat2();
-                          navigate.navigate("Profile", {itemId2: item.carImage});
+                          navigate.navigate("Motorcycle", {itemId2: item.carImage});
                           setCarImage(item.carImage);
                           setUserId(user.uid);
                           
 
                           
 
-                        }} />
+                        }} >
+
+                                <Text className="text-[#ffffff] text-center mt-2">Book a motorcycle</Text>
+                        </TouchableOpacity>
+                        
                       </View>
 
                     {/* <TouchableHighlight onPress={showToast}>
@@ -235,4 +236,4 @@ const CarDetails = ({route, navigation}) => {
   )
 }
 
-export default CarDetails
+export default MotorcycleDetails

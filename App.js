@@ -12,6 +12,12 @@ import Bookings from "./components/Bookings";
 import EditProfile from "./components/EditProfile";
 import RentCar from './components/RentCar';
 import CarDetails from './components/CarDetails';
+import BookingMap from './components/BookingMap';
+import Motorcycle from './components/Motorcycle';
+import MotorcycleSettings from './components/MotorcycleSettings';
+import RentMotorcycle from './components/RentMotorcycle';
+import MotorcycleDetails from './components/MotorcycleDetails';
+import MotorcycleBookings from './components/MotorcycleBookings';
 import { auth } from './components/Firebase';
 import React, { useState, useEffect } from 'react';
 import { getAuth, onAuthStateChanged } from "firebase/auth";
@@ -61,8 +67,13 @@ const Navigator = () => {
       <Stack.Screen name="RentCar" component={RentCar} />
       <Stack.Screen name="EditProfile" component={EditProfile} />
       <Stack.Screen name="CarDetails" component={CarDetails} />
+      <Stack.Screen name="BookingMap" component={BookingMap} />
       <Stack.Screen name="Bookings" component={Bookings} />
-
+      <Stack.Screen name="Motorcycle" component={Motorcycle} />
+      <Stack.Screen name="MotorcycleSettings" component={MotorcycleSettings} />
+      <Stack.Screen name="RentMotorcycle" component={RentMotorcycle} />
+      <Stack.Screen name="MotorcycleDetails" component={MotorcycleDetails} />
+      <Stack.Screen name="MotorcycleBookings" component={MotorcycleBookings} />
     </Stack.Navigator>
     </>
   );
